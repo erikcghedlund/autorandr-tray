@@ -7,21 +7,16 @@ import autorandrbindings as autorandr
 __location__ = path.realpath(path.join(getcwd(), path.dirname(__file__)))
 
 
-def create_image():
-    # Generate an image and draw a pattern
-    return Image.open(path.join(__location__, "icon.png"))
-
-
-def set_state(v):
+def set_state(s: str):
     def inner(icon, item):
-        autorandr.set_profile(v)
+        autorandr.set_profile(s)
 
     return inner
 
 
-def get_state(v):
+def get_state(s: str):
     def inner(item):
-        return autorandr.current_profile() == v
+        return autorandr.current_profile() == s
 
     return inner
 
@@ -30,7 +25,7 @@ def get_state(v):
 # items to allow the menu to grow
 icon(
     "test",
-    create_image(),
+    Image.open(path.join(__location__, "icon.png")),
     menu=menu(
         lambda: (
             item(profile, set_state(profile), checked=get_state(profile), radio=True)
