@@ -13,7 +13,10 @@ def available_profiles():
 
 
 def set_profile(profile: str):
-    run(["autorandr", profile])
+    if profile in __available_profiles__():
+        run(["autorandr", profile])
+    else:
+        raise ValueError("Profile {} is not a registered profile".format(profile))
 
 
 def current_profile():
