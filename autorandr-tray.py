@@ -88,7 +88,7 @@ def setup_icon():
 def main_loop():
     global last_set
     while alive:
-        sleep(0.5)
+        sleep(60)
         cur_set = autorandr.current_profile()
         if last_set == cur_set:
             continue
